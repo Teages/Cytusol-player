@@ -42,7 +42,7 @@
         <!-- <iframe style="height: 100vh; width: 100%; border: 0" src="https://ctdplayer.teages.xyz"></iframe> -->
         <iframe 
           style="height: 100vh; width: 100%; border: 0"
-          src="http://192.168.123.1:1202"
+          src="https://ctdplayer.teages.xyz"
           ref='player'
           @load="sendData($refs['player'])"
         />
