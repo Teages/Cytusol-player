@@ -1,0 +1,36 @@
+{
+  "schema_version": 2,
+  "version": 20,
+  "id": "teages.yunomi.yumeiroparedo",
+  "title": "夢色パレード (w/ 桃箱 & miko)",
+  "title_localized": "Yumeiro Parade (w/ Momobako & miko)",
+  "artist": "Yunomi",
+  "artist_source": "https://iamyunomi.bandcamp.com/track/w-miko-6",
+  "illustrator": "きあと",
+  "illustrator_localized": "kiato",
+  "illustrator_source": "https://twitter.com/_kiato/status/921712191769690112",
+  "charter": "Teages",
+  "music": {
+    "path": "Music.ogg"
+  },
+  "music_preview": {
+    "path": "preview.ogg"
+  },
+  "background": {
+    "path": "Background.jpg"
+  },
+  "charts": [
+    {
+      "type": "extreme",
+      "name": "EX",
+      "difficulty": 11,
+      "path": "Chaos.json"
+    },
+    {
+      "type": "hard",
+      "name": "HARD",
+      "difficulty": 7,
+      "path": "Hard.json"
+    }
+  ]
+}
