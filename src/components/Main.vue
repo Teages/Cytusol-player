@@ -51,7 +51,10 @@
 
             <div v-else-if="way === 2">
               <v-file-input
+                v-model="localFile"
                 show-size
+                truncate-length="50"
+                accept=".cytoidlevel, .zip"
                />
             </div>
           </v-card-text>
@@ -109,6 +112,8 @@
 
 <script>
 import Axios from "axios";
+import jsZip from "jszip";
+
 import CtdDiff from "./CtdDiff.vue";
 import CytoidPlayer from "./CytoidPlayer.vue";
 import CytoidLevelCard from "./CytoidLevelCard.vue";
@@ -136,7 +141,9 @@ export default {
     cdnSelected: 0,
     cdnCharts: [],
     chartData: null,
-    chartSelect: 0
+    chartSelect: 0,
+    localFile: null,
+    localChart: null,
   }),
 
   computed: {
@@ -163,7 +170,7 @@ export default {
             case 1:
               return (this.cdnCharts[this.cdnSelected] ? true : false);
             case 2:
-              return false;
+              return (this.localFile ? true : false);
           }
           break;
         case 1:
@@ -179,8 +186,12 @@ export default {
           this.initChart()
           break;
         case 1:
+          this.chartData = null
+          this.initChart()
           break;
         case 2:
+          this.chartData = null
+          this.initChart()
           break;
       }
       this.step++
@@ -254,9 +265,69 @@ export default {
           this.loadChart(url)
           return
         } else if (this.way === 2) {
-          console.log(2)
+          console.log(this.localFile)
+          this.loadLocalChart()
+          return
         }
       })()
+    },
+    loadLocalChart() {
+      (async()=>{
+        let new_zip = new jsZip()
+        let levelJson = null
+        await new_zip.loadAsync(this.localFile)
+          .then(async (data)=>{
+            console.log(data)
+            await new_zip.file('level.json').async("string")
+              .then(str=>{
+                levelJson = JSON.parse(str)
+              })
+            if (levelJson != null) {
+              console.log(levelJson)
+              let metadata = {
+                title: (levelJson.title || ''),
+                artist: (levelJson.artist || ''),
+                charter: (levelJson.charter || ''),
+              }
+              
+
+              let backgroundURL = levelJson.background.path
+              let background
+              await new_zip.file(backgroundURL).async("blob")
+                .then(blob=>{
+                  background = blob
+                })
+              let chartList = {}
+              for (let chart of levelJson.charts) {
+                let type = chart.type
+                chartList[type] = {
+                  type,
+                  difficulty: chart.difficulty,
+                  title: chart.name || type,
+                  chart: (await (async ()=>{
+                    let chartURL = chart.path
+                    let chartJson
+                    await new_zip.file(chartURL).async("string")
+                      .then(str=>{
+                        chartJson = JSON.parse(str)
+                      })
+                    return chartJson
+                  })()),
+                  audio: (await (async ()=>{
+                    let audioURL = (chart['music_override'] ? chart['music_override'].path : levelJson.music.path)
+                    let audio;
+                    await new_zip.file(audioURL).async("blob")
+                      .then(blob=>{
+                        audio = blob
+                      })
+                    return audio
+                  })()),
+                }
+              }
+              this.chartData = {metadata, background, chartList}
+            }
+          })
+      })();
     }
   },
 
