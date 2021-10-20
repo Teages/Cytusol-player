@@ -9,11 +9,12 @@
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         color="primary"
-        dark
+        rounded
+
         v-bind="attrs"
         v-on="on"
       >
-        Play Chart
+        <v-icon>mdi-play</v-icon>
       </v-btn>
     </template>
     <v-card>

@@ -1,0 +1,25 @@
+{
+  "selectLanguage": "选择语言",
+  "close": "关闭",
+  "about": "关于",
+  "uploadWay": "选择方式",
+  "steps": [
+    "选择谱面",
+    "确认谱面",
+    "准备就绪"
+  ],
+  "ways": [
+    "播放演示谱面",
+    "从库中选择",
+    "上传 .cytoidlevel 文件"
+  ],
+  "loadingCDN": "正在读取数据库...",
+  "loadingChart": "正在加载谱面信息...",
+  "ready": "准备就绪",
+  "preview": "预览",
+  "chooseDifficulty": "选择难度",
+
+  "$vuetify": {
+    "noDataText": "no Data"
+  }
+}

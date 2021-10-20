@@ -1,0 +1,22 @@
+{
+  "selectLanguage": "Select Language",
+  "close": "Close",
+  "about": "About",
+  "uploadWay": "Upload Way",
+  "steps": [
+    "Select Level",
+    "Level Preview",
+    "Ready"
+  ],
+  "ways": [
+    "Play the default level",
+    "Select in the Cloud",
+    "Upload .cytoidlevel file"
+  ],
+  "loadingCDN": "Loading level list...",
+  "loadingChart": "Loading level data...",
+  "ready": "Ready",
+  "preview": "Preview",
+  "chooseDifficulty": "Choose a difficulty"
+
+}
