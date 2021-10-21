@@ -14,10 +14,17 @@
     "上传 .cytoidlevel 文件"
   ],
   "loadingCDN": "正在读取数据库...",
+  "loadingFaildCDN": "读取数据库失败",
   "loadingChart": "正在加载谱面信息...",
   "ready": "准备就绪",
   "preview": "预览",
   "chooseDifficulty": "选择难度",
+  "chartErrMessage": {
+    "level": "无法读取 level.json!",
+    "background": "无法读取背景图片!",
+    "chart": "无法读取谱面!",
+    "audio": "无法读取音频文件!"
+  },
 
   "$vuetify": {
     "noDataText": "no Data"

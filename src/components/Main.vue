@@ -21,11 +21,14 @@
               :label="$t('uploadWay')"
             ></v-select>
 
-            <div v-if="way === 1" @load="getCdnChart()">
-              <div v-if="cdnCharts.length < 1" class="pa-4 text-center">
-                <p>{{ $t("loadingCDN") }}</p>
-              </div>
-              <v-list two-line>
+            <div v-if="way === 1">
+              <v-alert
+                type="info" dense justify-end
+                v-if="cdnCharts.length < 1"
+              >
+                {{ $t("loadingCDN") }}
+              </v-alert>
+              <v-list v-else two-line>
                 <v-list-item-group
                   v-model="cdnSelected"
                   active-class="blue--text"
@@ -64,30 +67,43 @@
         </v-window-item>
 
         <v-window-item :value="1">
-          <v-card-text v-if="chartData">
-            <h4>{{ $t("preview") }}</h4>
-            <CytoidLevelCard :leveldata="chartData" />
-            <h4>{{ $t("chooseDifficulty") }}</h4>
-            <v-list>
-              <v-list-item-group
-                v-model="chartSelect"
-                active-class="blue--text"
-              >
-                <v-list-item
-                  v-for="chart in chartData.chartList"
-                  :key="chart.type"
+          <div style="height: 430px;">
+            <v-card-text v-if="chartData">
+              <h4>{{ $t("preview") }}</h4>
+              <CytoidLevelCard :leveldata="chartData" />
+              <h4>{{ $t("chooseDifficulty") }}</h4>
+              <v-list>
+                <v-list-item-group
+                  v-model="chartSelect"
+                  active-class="blue--text"
                 >
-                  <ctd-diff
-                    :type="chart.type"
-                    :name="chart.title"
-                    :diff="chart.difficulty"
-                  />
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card-text>
-          <div v-else class="pa-4 text-center">
-            <p>{{ $t("loadingChart") }}</p>
+                  <v-list-item
+                    v-for="chart in chartData.chartList"
+                    :key="chart.type"
+                  >
+                    <ctd-diff
+                      :type="chart.type"
+                      :name="chart.title"
+                      :diff="chart.difficulty"
+                    />
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </v-card-text>
+            <v-card-text v-else class="pa-4 text-center" style="height: 100%">
+              <v-alert
+                type="error" dense justify-end
+                v-if="chartError"
+              >
+                {{ $t("chartErrMessage")[chartError] }}
+              </v-alert>
+              <v-alert
+                type="info" dense justify-end
+                v-else
+              >
+                {{ $t("loadingChart") }}
+              </v-alert>
+            </v-card-text>
           </div>
         </v-window-item>
 
@@ -163,6 +179,7 @@ export default {
         { state: "", abbr: 2 },
       ],
       steps: ["", "", ""],
+      chartError: null,
       cdnURL: "https://worker.teages.xyz/cdn/cytoidlevels/",
       cdnSelected: 0,
       cdnCharts: [],
@@ -181,10 +198,14 @@ export default {
     },
     getCdnChart() {
       console.log("Downloading from CDN...");
-      Axios.get(this.cdnURL + "levels.json").then((response) => {
-        console.log(response.data);
-        this.cdnCharts = response.data.level || [];
-      });
+      Axios.get(this.cdnURL + "levels.json")
+        .then((response) => {
+          console.log(response);
+          if (response.data) {
+            this.cdnCharts = response.data.level;
+          }
+        })
+      return true
     },
     canNextStep() {
       switch (this.step) {
@@ -206,6 +227,7 @@ export default {
       }
     },
     nextStep() {
+      this.chartError = null
       switch (this.step) {
         case 0:
           this.chartData = null;
@@ -320,12 +342,18 @@ export default {
         let levelJson = null;
         await new_zip.loadAsync(this.localFile).then(async (data) => {
           console.log(data);
-          await new_zip
-            .file("level.json")
-            .async("string")
-            .then((str) => {
-              levelJson = JSON.parse(str);
-            });
+          try {
+            await new_zip
+              .file("level.json")
+              .async("string")
+              .then((str) => {
+                levelJson = JSON.parse(str);
+              });
+          } catch (error) {
+            console.log(error)
+            this.chartError = "level"
+            return;
+          }
           if (levelJson != null) {
             console.log(levelJson);
             let metadata = {
@@ -336,12 +364,18 @@ export default {
 
             let backgroundURL = levelJson.background.path;
             let background;
-            await new_zip
-              .file(backgroundURL)
-              .async("blob")
-              .then((blob) => {
-                background = blob;
-              });
+            try {
+              await new_zip
+                .file(backgroundURL)
+                .async("blob")
+                .then((blob) => {
+                  background = blob;
+                });
+            } catch (error) {
+              console.log(error)
+              this.chartError = "background"
+              return;
+            }
             let chartList = {};
             for (let chart of levelJson.charts) {
               let type = chart.type;
@@ -352,12 +386,18 @@ export default {
                 chart: await (async () => {
                   let chartURL = chart.path;
                   let chartJson;
-                  await new_zip
-                    .file(chartURL)
-                    .async("string")
-                    .then((str) => {
-                      chartJson = JSON.parse(str);
-                    });
+                  try {
+                    await new_zip
+                      .file(chartURL)
+                      .async("string")
+                      .then((str) => {
+                        chartJson = JSON.parse(str);
+                      });
+                  } catch (error) {
+                    console.log(error)
+                    this.chartError = "chart"
+                    return;
+                  }
                   return chartJson;
                 })(),
                 audio: await (async () => {
@@ -365,12 +405,18 @@ export default {
                     ? chart["music_override"].path
                     : levelJson.music.path;
                   let audio;
-                  await new_zip
-                    .file(audioURL)
-                    .async("blob")
-                    .then((blob) => {
-                      audio = blob;
-                    });
+                  try {
+                    await new_zip
+                      .file(audioURL)
+                      .async("blob")
+                      .then((blob) => {
+                        audio = blob;
+                      });
+                  } catch (error) {
+                    console.log(error)
+                    this.chartError = "audio"
+                    return;
+                  }
                   return audio;
                 })(),
               };

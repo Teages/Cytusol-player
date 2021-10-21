@@ -14,9 +14,15 @@
     "Upload .cytoidlevel file"
   ],
   "loadingCDN": "Loading level list...",
+  "loadingFaildCDN": "Can not load level list!",
   "loadingChart": "Loading level data...",
   "ready": "Ready",
   "preview": "Preview",
-  "chooseDifficulty": "Choose a difficulty"
-
+  "chooseDifficulty": "Choose a difficulty",
+  "chartErrMessage": {
+    "level": "Can not read level.json!",
+    "background": "Can not read background image!",
+    "chart": "Can not read chart!",
+    "audio": "Can not read audio!"
+  }
 }
