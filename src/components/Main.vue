@@ -121,7 +121,7 @@
         <v-btn :disabled="step === 0" rounded plain @click="step--">
           <v-icon>mdi-arrow-left-thick</v-icon>
         </v-btn>
-        <Info />
+        <v-spacer />
         <v-btn
           v-if="step < 1"
           :disabled="!canNextStep()"
@@ -157,7 +157,6 @@ import CtdDiff from "./CtdDiff.vue";
 import CytoidPlayer from "./CytoidPlayer.vue";
 import CytoidLevelCard from "./CytoidLevelCard.vue";
 import Language from "./Language.vue";
-import Info from "./Info.vue";
 export default {
   name: "Main",
 
@@ -166,7 +165,6 @@ export default {
     CytoidLevelCard,
     CtdDiff,
     Language,
-    Info,
   },
 
   data: function () {
@@ -180,7 +178,6 @@ export default {
       ],
       steps: ["", "", ""],
       chartError: null,
-      cdnURL: "https://worker.teages.xyz/cdn/cytoidlevels/",
       cdnSelected: 0,
       cdnCharts: [],
       chartData: null,
@@ -198,7 +195,7 @@ export default {
     },
     getCdnChart() {
       console.log("Downloading from CDN...");
-      Axios.get(this.cdnURL + "levels.json")
+      Axios.get(JSON.parse(localStorage.setting).cdnUrl + "levels.json")
         .then((response) => {
           console.log(response);
           if (response.data) {
@@ -326,7 +323,7 @@ export default {
           this.loadChart(defaultChartUrl);
           return;
         } else if (this.way === 1) {
-          let url = this.cdnURL + this.cdnCharts[this.cdnSelected].id;
+          let url = JSON.parse(localStorage.setting).cdnUrl + this.cdnCharts[this.cdnSelected].id;
           this.loadChart(url);
           return;
         } else if (this.way === 2) {

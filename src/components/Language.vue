@@ -23,7 +23,8 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-spacer />
+          <v-btn color="darken-1" text @click="dialog = false">
             {{ $t("close") }}
           </v-btn>
         </v-card-actions>

@@ -24,5 +24,14 @@
     "background": "Can not read background image!",
     "chart": "Can not read chart!",
     "audio": "Can not read audio!"
+  },
+  "setting": {
+    "title": "Setting",
+    "playingTitle": "Player Setting",
+    "offset": "Offset (s)",
+    "playspeed": "Play Speed",
+    "luncherTitle": "Luncher Setting",
+    "cdnUrl": "Chart list Url",
+    "reset": "Reset all setting"
   }
 }

@@ -20,6 +20,7 @@
     <v-card>
       <v-toolbar
         dark
+        dense
         color="primary"
       >
         <v-btn
@@ -47,6 +48,12 @@
           ref='player'
           @load="sendData($refs['player'])"
         />
+        <!-- <iframe 
+          style="height: 100vh; width: 100%; border: 0"
+          src="http://localhost:1202"
+          ref='player'
+          @load="sendData($refs['player'])"
+        /> -->
       </div>
     </v-card>
   </v-dialog>
@@ -85,6 +92,9 @@ export default {
             difficultyName: this.leveldata.chartList[type].title,
             difficultyLevel: this.leveldata.chartList[type].difficulty,
             levelName: this.leveldata.metadata.title,
+          },
+          player: {
+            deviceOffset: JSON.parse(localStorage.setting).deviceOffset || 0
           }
         }
       },'*')

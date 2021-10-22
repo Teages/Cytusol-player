@@ -25,7 +25,15 @@
     "chart": "无法读取谱面!",
     "audio": "无法读取音频文件!"
   },
-
+  "setting": {
+    "title": "设置",
+    "playingTitle": "播放设置",
+    "offset": "延迟 (s)",
+    "playspeed": "播放速度",
+    "luncherTitle": "启动器设置",
+    "cdnUrl": "云谱面位置",
+    "reset": "重置所有设置"
+  },
   "$vuetify": {
     "noDataText": "no Data"
   }

@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <div>
     <v-dialog v-model="dialog" scrollable style="height: 400px; width: 50px;" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn icon v-bind="attrs" v-on="on">
@@ -31,18 +31,19 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-spacer />
+          <v-btn color="darken-1" text @click="dialog = false">
             {{ $t("close") }}
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Language",
+  name: "Info",
   data: function () {
     return {
       dialog: false
