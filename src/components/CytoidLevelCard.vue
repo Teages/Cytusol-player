@@ -2,11 +2,11 @@
   <div>
     <p v-if="err" v-text="'Failed'" style="opacity: 0.3" />
     <div class="cytoid-level-card" v-else-if="leveldata">
-      <div class="background-dim" />
       <div
         class="background"
         :style="'background-image: url(' + getBlobUrl(leveldata.background) + ')'"
       />
+      <div class="background-dim" />
       <div class="index">
         <div class="top-content">
           <div />
@@ -86,13 +86,13 @@ export default {
 }
 
 .cytoid-level-card .background-dim {
-  opacity: 1;
+  opacity: 0.75;
   background: #333;
   /* z-index: -2; */
 }
 
 .cytoid-level-card .background {
-  opacity: 0.3;
+  opacity: 1;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -105,11 +105,7 @@ export default {
   justify-content: space-between;
   height: calc(100% - 1rem);
   padding: 0.5rem 0.75rem;
-  z-index: 1;
-}
-
-.cytoid-level-card .index * {
-  z-index: 10;
+  position: relative;
 }
 
 .cytoid-level-card .index .top-content {
