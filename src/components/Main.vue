@@ -8,6 +8,13 @@
           <v-icon>mdi-translate</v-icon>
         </v-btn> -->
         <CyShare v-if="way === 2 && step === 1 && chartData != null" :levelBlob="localFile" />
+        <v-btn
+          v-if="way === 3 && step === 1 && chartData != null"
+          rounded
+          :href="downloadSharedUrl" target="_blank" :download="chartData.metadata.id + '.cytoidlevel'"
+        >
+          <v-icon>mdi-cloud-download</v-icon>
+        </v-btn>
       </v-card-title>
 
       <v-window v-model="step" touchless>
@@ -16,11 +23,24 @@
             <div v-if="(shareId ? true : false)">
               <v-alert
                 type="info" dense justify-end
+                v-if="downloadProgress >= 0 && downloadProgress <= 100"
               >
                 {{ $t("downloadingLevel", {progress: downloadProgress}) }}
                 <!-- 正在下载谱面... ({{ downloadProgress }}%) -->
               </v-alert>
-              <v-progress-linear rounded :value="downloadProgress"/>
+              
+              <v-alert
+                type="error" dense justify-end
+                v-else
+              >
+                {{ $t("downloadFailed") }}
+                <!-- 正在下载谱面... ({{ downloadProgress }}%) -->
+              </v-alert>
+              <v-progress-linear 
+                :color="(downloadProgress >= 0 && downloadProgress <= 100) ? undefined : 'red'" 
+                class="my-3"
+                rounded :value="downloadProgress"
+              />
             </div>
             <v-select
               v-model="way"
@@ -199,6 +219,7 @@ export default {
       localChart: null,
       shareId: null,
       downloadProgress: 0,
+      downloadSharedUrl: ''
     };
   },
 
@@ -270,6 +291,7 @@ export default {
             title: levelJson.title || "",
             artist: levelJson.artist || "",
             charter: levelJson.charter || "",
+            id: levelJson.id || "",
           };
 
           let backgroundURL = url + "/" + levelJson.background.path;
@@ -367,6 +389,7 @@ export default {
               title: levelJson.title || "",
               artist: levelJson.artist || "",
               charter: levelJson.charter || "",
+              id: levelJson.id || "",
             };
 
             let backgroundURL = levelJson.background.path;
@@ -437,8 +460,6 @@ export default {
       (async() => {
         let levelUrl = 'https://worker.teages.xyz/shareId/' + this.shareId
         console.log(levelUrl)
-        // await Axios(levelUrl)
-        //   .then((response)=>{console.log(response)})
         await Axios({
           url: levelUrl,
           responseType: "blob",
@@ -452,12 +473,17 @@ export default {
             this.way = 3
             this.nextStep()
             this.localFile = response.data;
+            this.downloadSharedUrl = this.getBlobUrl(this.localFile)
             this.loadLocalChart();
           } else (
             this.shareId = null
           )
         })
       })();
+    },
+    getBlobUrl(blob) {
+      console.log(blob)
+      return URL.createObjectURL(blob)
     },
     getUrlKey(name) {
       let query = window.location.search.substring(1);

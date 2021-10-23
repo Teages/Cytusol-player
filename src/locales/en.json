@@ -35,6 +35,7 @@
     "reset": "Reset all setting"
   },
   "downloadingLevel": "Downloading... ({progress}%)",
+  "downloadFailed": "Download Failed.",
   "share": {
     "share": "Share",
     "logout": "Logout",
