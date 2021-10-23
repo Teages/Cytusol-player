@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" scrollable style="height: 400px; width: 50px;" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn icon class="mx-2" v-bind="attrs" v-on="on">
+        <v-btn icon class="ml-2" v-bind="attrs" v-on="on">
           <v-icon>mdi-cog</v-icon>
         </v-btn>
       </template>

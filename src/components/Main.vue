@@ -13,8 +13,8 @@
           <v-icon>mdi-cloud-download</v-icon>
         </v-btn>
       </v-card-title>
-
-      <v-window v-model="step" touchless style="overflow: auto">
+      
+      <v-window v-model="step" touchless>
         <v-window-item :value="0">
           <v-card-text>
             <div v-if="(shareId ? true : false)">
@@ -92,7 +92,7 @@
         </v-window-item>
 
         <v-window-item :value="1">
-          <div style="height: 430px;">
+          <div style="height: 450px;" class="hide-scroller">
             <v-card-text v-if="chartData">
               <h4>{{ $t("preview") }}</h4>
               <CytoidLevelCard :leveldata="chartData" />
@@ -192,7 +192,7 @@ export default {
     CytoidPlayer,
     CytoidLevelCard,
     CtdDiff,
-    CyShare
+    CyShare,
   },
 
   data: function () {
@@ -550,3 +550,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.hide-scroller { 
+  overflow-y: auto;
+} 
+.hide-scroller::-webkit-scrollbar {
+  width: 0;
+}
+</style>

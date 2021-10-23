@@ -39,6 +39,7 @@
   "share": {
     "share": "Share",
     "logout": "Logout",
-    "login": "Login with OneDrive"
+    "login": "Login with OneDrive",
+    "useragreement": "User Agreement"
   }
 }

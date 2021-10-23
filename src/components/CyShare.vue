@@ -21,13 +21,9 @@
         dense
         color="primary"
       >
-        <v-btn
-          icon
-          dark
-          @click="display = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
+        <v-avatar size="32" class="mr-3">
+          <img src="/favicon_red.ico" alt="CyPlayer" />
+        </v-avatar>
         <v-toolbar-title>CyShare</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -55,11 +51,18 @@
             </template>
           </v-text-field>
         </div>
-        <v-btn v-else rounded block 
-          @click="openLoginUrl"
-        >
-          {{$t('share.login')}}
-        </v-btn>
+        <div v-else class="text-center">
+          <v-btn rounded block color="primary"
+            @click="openLoginUrl"
+          >
+            {{$t('share.login')}}
+          </v-btn>
+          <v-btn text rounded block class="my-4"
+            href="https://github.com/Teages/C2Player-Web#share-with-onedrive" target="_blank"
+          >
+            {{$t('share.useragreement')}}
+          </v-btn>
+        </div>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>

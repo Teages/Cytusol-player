@@ -39,7 +39,8 @@
   "share": {
     "share": "分享",
     "logout": "登出",
-    "login": "使用 OneDrive 登录"
+    "login": "使用 OneDrive 登录",
+    "useragreement": "使用即同意用户条款"
   },
   "$vuetify": {
     "noDataText": "no Data"
