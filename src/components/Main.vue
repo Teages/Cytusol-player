@@ -13,12 +13,22 @@
       <v-window v-model="step" touchless>
         <v-window-item :value="0">
           <v-card-text>
+            <div v-if="(shareId ? true : false)">
+              <v-alert
+                type="info" dense justify-end
+              >
+                {{ $t("downloadingLevel", {progress: downloadProgress}) }}
+                <!-- 正在下载谱面... ({{ downloadProgress }}%) -->
+              </v-alert>
+              <v-progress-linear rounded :value="downloadProgress"/>
+            </div>
             <v-select
               v-model="way"
               :items="ways"
               item-text="state"
               item-value="abbr"
               :label="$t('uploadWay')"
+              :disabled="(shareId ? true : false)"
             ></v-select>
 
             <div v-if="way === 1">
@@ -118,8 +128,11 @@
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn :disabled="step === 0" rounded plain @click="step--">
+        <v-btn v-if="!shareId" :disabled="step === 0" rounded plain @click="step--">
           <v-icon>mdi-arrow-left-thick</v-icon>
+        </v-btn>
+        <v-btn v-else :disabled="step === 0" rounded plain href="/">
+          <v-icon>mdi-home</v-icon>
         </v-btn>
         <v-spacer />
         <v-btn
@@ -184,6 +197,8 @@ export default {
       chartSelect: 0,
       localFile: null,
       localChart: null,
+      shareId: null,
+      downloadProgress: 0,
     };
   },
 
@@ -225,20 +240,8 @@ export default {
     },
     nextStep() {
       this.chartError = null
-      switch (this.step) {
-        case 0:
-          this.chartData = null;
-          this.initChart();
-          break;
-        case 1:
-          this.chartData = null;
-          this.initChart();
-          break;
-        case 2:
-          this.chartData = null;
-          this.initChart();
-          break;
-      }
+      this.chartData = null;
+      this.initChart();
       this.step++;
     },
     canPlay() {
@@ -330,10 +333,17 @@ export default {
           console.log(this.localFile);
           this.loadLocalChart();
           return;
+        } else if (this.way === 3) {
+          console.log(this.localFile);
+          this.loadLocalChart();
+          return;
         }
       })();
     },
     loadLocalChart() {
+      if (this.localFile == null) {
+        return;
+      }
       (async () => {
         let new_zip = new jsZip();
         let levelJson = null;
@@ -423,6 +433,43 @@ export default {
         });
       })();
     },
+    loadSharedChart() {
+      (async() => {
+        let levelUrl = 'https://worker.teages.xyz/shareId/' + this.shareId
+        console.log(levelUrl)
+        // await Axios(levelUrl)
+        //   .then((response)=>{console.log(response)})
+        await Axios({
+          url: levelUrl,
+          responseType: "blob",
+          method: "get",
+          onDownloadProgress: (progress) => {
+            this.downloadProgress = Math.round(progress.loaded / progress.total * 100)
+          }
+        }).then((response) => {
+          console.log(response)
+          if (response.data) {
+            this.way = 3
+            this.nextStep()
+            this.localFile = response.data;
+            this.loadLocalChart();
+          } else (
+            this.shareId = null
+          )
+        })
+      })();
+    },
+    getUrlKey(name) {
+      let query = window.location.search.substring(1);
+      let vars = query.split("&");
+      for (let i = 0;i < vars.length; i++) {
+        let pair = vars[i].split("=");
+        if(pair[0] == name){
+          return pair[1];
+        }
+      }
+      return null;
+    },
 
     currentTitle() {
       return this.$t("steps")[this.step];
@@ -437,6 +484,10 @@ export default {
   mounted() {
     this.getCdnChart();
     this.loadLocate();
+    if (this.getUrlKey('shareId')) {
+      this.shareId = this.getUrlKey('shareId')
+      this.loadSharedChart()
+    }
     // console.log(this.$t('steps'))
   },
   beforeUpdate() {

@@ -34,6 +34,7 @@
     "cdnUrl": "云谱面位置",
     "reset": "重置所有设置"
   },
+  "downloadingLevel": "正在下载谱面... ({progress}%)",
   "$vuetify": {
     "noDataText": "no Data"
   }

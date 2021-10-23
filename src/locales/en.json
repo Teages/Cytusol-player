@@ -33,5 +33,6 @@
     "luncherTitle": "Luncher Setting",
     "cdnUrl": "Chart list Url",
     "reset": "Reset all setting"
-  }
+  },
+  "downloadingLevel": "Downloading... ({progress}%)"
 }
