@@ -122,6 +122,7 @@ export default {
       console.log(filePath);
       this.shared = true;
       (async()=>{
+        await this.requestFolder(token)
         if (file.size > 4 * 1000 * 1000) {
           let uploadUrl = '';
           await Axios({
@@ -143,6 +144,15 @@ export default {
         this.shareLink = `https://player.teages.xyz/?shareId=${shareData.data.shareId}`
         this.uploadProgress = 101
       })();
+    },
+    requestFolder(token) {
+      return Axios({
+        method: 'Get',
+        url: `https://graph.microsoft.com/v1.0/me/drive/special/approot:/`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
     },
     uploadSmall(file, path, token) {
       this.uploadProgress = 0
