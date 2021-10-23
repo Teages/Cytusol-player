@@ -4,9 +4,6 @@
       <v-card-title class="text-h6 font-weight-regular justify-space-between">
         <span v-text="currentTitle()" />
         <v-spacer />
-        <!-- <v-btn icon @click="()=>{$vuetify.lang.current = 'zhHans'; log($t('uploadWay'))}">
-          <v-icon>mdi-translate</v-icon>
-        </v-btn> -->
         <CyShare v-if="way === 2 && step === 1 && chartData != null" :levelBlob="localFile" />
         <v-btn
           v-if="way === 3 && step === 1 && chartData != null"
@@ -17,7 +14,7 @@
         </v-btn>
       </v-card-title>
 
-      <v-window v-model="step" touchless>
+      <v-window v-model="step" touchless style="overflow: auto">
         <v-window-item :value="0">
           <v-card-text>
             <div v-if="(shareId ? true : false)">
@@ -26,7 +23,6 @@
                 v-if="downloadProgress >= 0 && downloadProgress <= 100"
               >
                 {{ $t("downloadingLevel", {progress: downloadProgress}) }}
-                <!-- 正在下载谱面... ({{ downloadProgress }}%) -->
               </v-alert>
               
               <v-alert
@@ -34,7 +30,6 @@
                 v-else
               >
                 {{ $t("downloadFailed") }}
-                <!-- 正在下载谱面... ({{ downloadProgress }}%) -->
               </v-alert>
               <v-progress-linear 
                 :color="(downloadProgress >= 0 && downloadProgress <= 100) ? undefined : 'red'" 
@@ -233,7 +228,7 @@ export default {
       console.log("Downloading from CDN...");
       Axios.get(JSON.parse(localStorage.setting).cdnUrl + "levels.json")
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response.data) {
             this.cdnCharts = response.data.level;
           }
@@ -352,11 +347,11 @@ export default {
           this.loadChart(url);
           return;
         } else if (this.way === 2) {
-          console.log(this.localFile);
+          // console.log(this.localFile);
           this.loadLocalChart();
           return;
         } else if (this.way === 3) {
-          console.log(this.localFile);
+          // console.log(this.localFile);
           this.loadLocalChart();
           return;
         }
@@ -379,7 +374,7 @@ export default {
                 levelJson = JSON.parse(str);
               });
           } catch (error) {
-            console.log(error)
+            console.error(error)
             this.chartError = "level"
             return;
           }
@@ -402,7 +397,7 @@ export default {
                   background = blob;
                 });
             } catch (error) {
-              console.log(error)
+              console.error(error)
               this.chartError = "background"
               return;
             }
@@ -424,7 +419,7 @@ export default {
                         chartJson = JSON.parse(str);
                       });
                   } catch (error) {
-                    console.log(error)
+                    console.error(error)
                     this.chartError = "chart"
                     return;
                   }
@@ -443,7 +438,7 @@ export default {
                         audio = blob;
                       });
                   } catch (error) {
-                    console.log(error)
+                    console.error(error)
                     this.chartError = "audio"
                     return;
                   }
@@ -459,7 +454,7 @@ export default {
     loadSharedChart() {
       (async() => {
         let levelUrl = 'https://worker.teages.xyz/shareId/' + this.shareId
-        console.log(levelUrl)
+        // console.log(levelUrl)
         await Axios({
           url: levelUrl,
           responseType: "blob",
@@ -468,7 +463,7 @@ export default {
             this.downloadProgress = Math.round(progress.loaded / progress.total * 100)
           }
         }).then((response) => {
-          console.log(response)
+          // console.log(response)
           if (response.data) {
             this.way = 3
             this.nextStep()
@@ -482,7 +477,7 @@ export default {
       })();
     },
     getBlobUrl(blob) {
-      console.log(blob)
+      // console.log(blob)
       return URL.createObjectURL(blob)
     },
     getUrlKey(name) {
@@ -548,7 +543,7 @@ export default {
       this.loadSharedChart()
     }
     this.getToken()
-    console.log(localStorage)
+    // console.log(localStorage)
   },
   beforeUpdate() {
     this.loadLocate();

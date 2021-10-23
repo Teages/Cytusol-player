@@ -119,7 +119,7 @@ export default {
       const filePath = `${directory}/${Date.now()}-${file.name}`;
       const token = this.token.access_token
       let uploadResponse;
-      console.log(filePath);
+      // console.log(filePath);
       this.shared = true;
       (async()=>{
         await this.requestFolder(token)

@@ -41,19 +41,12 @@
         </v-btn>
       </v-toolbar>
       <div v-if="display" style="height: 100vh; width: 100%; border: 0" id="player-context" ref='player-box'>
-        <!-- <iframe style="height: 100vh; width: 100%; border: 0" src="https://ctdplayer.teages.xyz"></iframe> -->
         <iframe 
           style="height: 100vh; width: 100%; border: 0"
           src="https://ctdplayer.teages.xyz"
           ref='player'
           @load="sendData($refs['player'])"
         />
-        <!-- <iframe 
-          style="height: 100vh; width: 100%; border: 0"
-          src="http://localhost:1202"
-          ref='player'
-          @load="sendData($refs['player'])"
-        /> -->
       </div>
     </v-card>
   </v-dialog>
@@ -79,7 +72,7 @@ export default {
   },
   methods: {
     sendData(dom) {
-      console.log(dom)
+      // console.log(dom)
       let type = this.chartType
       dom.contentWindow.postMessage({
         type: 'leveldata',

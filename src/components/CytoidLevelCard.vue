@@ -60,7 +60,7 @@ export default {
       this.leveldata = data;
     },
     getBlobUrl(blob) {
-      console.log(blob)
+      // console.log(blob)
       return URL.createObjectURL(blob)
     }
   },

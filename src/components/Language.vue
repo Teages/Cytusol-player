@@ -17,8 +17,6 @@
               :value="lang.value"
               :label="lang.name"
             />
-            <!-- <v-radio label="Bahamas, The" value="bahamas"></v-radio>
-            <v-radio label="Burundi" value="burundi"></v-radio> -->
           </v-radio-group>
         </v-card-text>
         <v-divider></v-divider>
@@ -60,7 +58,7 @@ export default {
       let userLang = window.navigator.userLanguage || window.navigator.language
       for (let lang of this.langs) {
         if (lang.support != null && lang.support.length > 0) {
-          console.log(lang.support.indexOf(userLang))
+          // console.log(lang.support.indexOf(userLang))
           if (lang.support.indexOf(userLang.toLowerCase()) >= 0) {
             this.$i18n.locale = lang.value
             console.log(lang.value)
