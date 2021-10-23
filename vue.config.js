@@ -19,5 +19,12 @@ module.exports = {
       includeLocales: false,
       enableBridge: true
     }
+  },
+
+  pwa: {
+    name: 'CyPlayer',
+    themeColor: '#329EF4',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
   }
 }
