@@ -2,7 +2,7 @@
   <v-row justify="end">
     <v-dialog v-model="dialog" scrollable max-width="300px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
+        <v-btn icon class="mx-2" v-bind="attrs" v-on="on">
           <v-icon>mdi-translate</v-icon>
         </v-btn>
       </template>

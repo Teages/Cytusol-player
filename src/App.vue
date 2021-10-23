@@ -59,6 +59,7 @@
         <v-toolbar-title v-text="'CyPlayer'" class="mx-2"/>
       </div>
     <v-spacer/>
+    <Language />
     <Setting />
     </v-app-bar>
     <v-main>
@@ -70,12 +71,13 @@
 <script>
 import Main from './components/Main';
 import Setting from './components/Setting.vue';
+import Language from './components/Language.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Main, Setting
+    Main, Setting, Language
   },
 
   data: () => ({

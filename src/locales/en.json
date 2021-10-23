@@ -34,5 +34,10 @@
     "cdnUrl": "Chart list Url",
     "reset": "Reset all setting"
   },
-  "downloadingLevel": "Downloading... ({progress}%)"
+  "downloadingLevel": "Downloading... ({progress}%)",
+  "share": {
+    "share": "Share",
+    "logout": "Logout",
+    "login": "Login with OneDrive"
+  }
 }

@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" scrollable style="height: 400px; width: 50px;" max-width="500px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
+        <v-btn icon class="mx-2" v-bind="attrs" v-on="on">
           <v-icon>mdi-cog</v-icon>
         </v-btn>
       </template>
@@ -106,12 +106,12 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('storage', (event) => {
-      // if (event.key && event.key == 'setting') {
-      //   this.setting.deviceOffset = event.newValue.deviceOffset || 0
-      // }
-        console.log(event)
-    })
+    // window.addEventListener('storage', (event) => {
+    //   // if (event.key && event.key == 'setting') {
+    //   //   this.setting.deviceOffset = event.newValue.deviceOffset || 0
+    //   // }
+    //     console.log(event)
+    // })
   },
 };
 </script>

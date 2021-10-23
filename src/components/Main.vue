@@ -7,7 +7,7 @@
         <!-- <v-btn icon @click="()=>{$vuetify.lang.current = 'zhHans'; log($t('uploadWay'))}">
           <v-icon>mdi-translate</v-icon>
         </v-btn> -->
-        <Language />
+        <CyShare v-if="way === 2 && step === 1 && chartData != null" :levelBlob="localFile" />
       </v-card-title>
 
       <v-window v-model="step" touchless>
@@ -169,7 +169,7 @@ import jsZip from "jszip";
 import CtdDiff from "./CtdDiff.vue";
 import CytoidPlayer from "./CytoidPlayer.vue";
 import CytoidLevelCard from "./CytoidLevelCard.vue";
-import Language from "./Language.vue";
+import CyShare from "./CyShare.vue";
 export default {
   name: "Main",
 
@@ -177,7 +177,7 @@ export default {
     CytoidPlayer,
     CytoidLevelCard,
     CtdDiff,
-    Language,
+    CyShare
   },
 
   data: function () {
@@ -470,6 +470,39 @@ export default {
       }
       return null;
     },
+    getHash(name) {
+      if (window.location.hash) {
+        let data = window.location.hash.substring(1);
+        let vars = data.split("&");
+        for (let i = 0;i < vars.length; i++) {
+          let pair = vars[i].split("=");
+          if(pair[0] == name){
+            return pair[1];
+          }
+        }
+      }
+      return null;  
+    },
+    getToken() {
+      if (window.location.hash) {
+        if (!this.getHash('access_token')) return null
+        localStorage.onedriveToken = JSON.stringify({
+          date: Date.now(),
+          expires: this.getHash('expires_in') * 1000,
+          value: {
+            access_token: this.getHash('access_token'),
+            token_type: this.getHash('token_type'),
+            scope: this.getHash('scope'),
+          }
+        })
+        window.close()
+      } else if (localStorage.onedriveToken) {
+        let object = JSON.parse(localStorage.onedriveToken)
+        if (object!=null && Date.now() > object.date + object.expires) {
+          localStorage.onedriveToken = null
+        }
+      }
+    },
 
     currentTitle() {
       return this.$t("steps")[this.step];
@@ -488,7 +521,8 @@ export default {
       this.shareId = this.getUrlKey('shareId')
       this.loadSharedChart()
     }
-    // console.log(this.$t('steps'))
+    this.getToken()
+    console.log(localStorage)
   },
   beforeUpdate() {
     this.loadLocate();
