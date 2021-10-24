@@ -469,7 +469,7 @@ export default {
             this.nextStep()
             this.localFile = response.data;
             this.loadLocalChart();
-            this.downloadSharedUrl = this.getBlobUrl(response.data.slice(0,response.data.size,'application/x-cytoidlevle'))
+            this.downloadSharedUrl = this.getBlobUrl(response.data.slice(0,response.data.size,'application/x-cytoidlevel'))
           } else (
             this.shareId = null
           )
