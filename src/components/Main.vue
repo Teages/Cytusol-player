@@ -146,7 +146,7 @@
         <v-btn v-if="!shareId" :disabled="step === 0" rounded plain @click="step--">
           <v-icon>mdi-arrow-left-thick</v-icon>
         </v-btn>
-        <v-btn v-else :disabled="step === 0" rounded plain href="/">
+        <v-btn v-else rounded plain href="/">
           <v-icon>mdi-home</v-icon>
         </v-btn>
         <v-spacer />
@@ -468,8 +468,8 @@ export default {
             this.way = 3
             this.nextStep()
             this.localFile = response.data;
-            this.downloadSharedUrl = this.getBlobUrl(this.localFile)
             this.loadLocalChart();
+            this.downloadSharedUrl = this.getBlobUrl(response.data.slice(0,response.data.size,'application/x-cytoidlevle'))
           } else (
             this.shareId = null
           )
