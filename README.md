@@ -1,3 +1,5 @@
+> Notice: The program will rename recently.
+
 # C2Player-Web
 
 A simple C2-like level (used in [Cytoid](https://github.com/Cytoid/Cytoid)) Chart Player.
