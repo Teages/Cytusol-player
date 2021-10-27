@@ -26,6 +26,7 @@
         <v-list-item
           link
           href="https://github.com/Teages/C2Player-Web" target="_blank"
+          draggable="false"
         >
           <v-list-item-icon>
             <v-icon>mdi-github</v-icon>
@@ -37,6 +38,7 @@
         <v-list-item
           link
           href="https://cytoid.io" target="_blank"
+          draggable="false"
         >
           <v-list-item-icon>
             <v-icon>mdi-open-in-new</v-icon>

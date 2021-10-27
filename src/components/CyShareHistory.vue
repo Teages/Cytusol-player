@@ -43,6 +43,7 @@
             :key="item.shareId"
             link
             :href="'/?shareId=' + item.shareId"
+            draggable="false"
           >
             <!-- <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
