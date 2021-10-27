@@ -4,7 +4,8 @@
       <v-card-title class="text-h6 font-weight-regular justify-space-between">
         <span v-text="currentTitle()" />
         <v-spacer />
-        <CyShare v-if="way === 2 && step === 1 && chartData != null" :levelBlob="localFile" />
+        <CyShareHistory v-if="step === 0" :share-id="getUrlKey('shareId')" />
+        <CyShare v-else-if="way === 2 && step === 1 && chartData != null" :levelBlob="localFile" />
         <v-btn
           v-if="way === 3 && step === 1 && chartData != null"
           rounded
@@ -185,6 +186,8 @@ import CtdDiff from "./CtdDiff.vue";
 import CytoidPlayer from "./CytoidPlayer.vue";
 import CytoidLevelCard from "./CytoidLevelCard.vue";
 import CyShare from "./CyShare.vue";
+import CyShareHistory from "./CyShareHistory.vue";
+
 export default {
   name: "Main",
 
@@ -193,7 +196,8 @@ export default {
     CytoidLevelCard,
     CtdDiff,
     CyShare,
-  },
+    CyShareHistory,
+},
 
   data: function () {
     return {
@@ -449,6 +453,7 @@ export default {
             this.chartData = { metadata, background, chartList };
           }
         });
+        this.saveLevelCache()
       })();
     },
     loadSharedChart() {
@@ -522,6 +527,45 @@ export default {
         if (object!=null && Date.now() > object.date + object.expires) {
           localStorage.onedriveToken = null
         }
+      }
+    },
+
+    saveLevelCache() {
+      if (this.shareId) {
+
+        let datas = []
+        try {
+          datas = JSON.parse(localStorage.levelCache).cache
+        } catch {
+          datas = []
+        }
+        
+        for (let i in datas) {
+          if (datas[i].shareId == this.shareId) {
+            datas.splice(i,1)
+            break;
+          }
+        }
+        console.log(datas)
+        datas.push({
+          shareId: this.shareId,
+          metadata: (()=>{
+            console.log(this.chartData)
+            let chartDiffs = []
+            for (let key in this.chartData.chartList) {
+              let diff = this.chartData.chartList[key]
+              let diffdata = (((diff.title && diff.title != diff.type)? `${diff.title}(${diff.type})` : diff.type) + ": " + diff.difficulty)
+
+              console.log(diff,diffdata)
+              chartDiffs.push(diffdata)
+            }
+            return Object.assign(this.chartData.metadata, {level: chartDiffs.join(', ')}) 
+          })()
+        })
+
+        localStorage.levelCache = JSON.stringify({
+          cache: datas
+        })
       }
     },
 

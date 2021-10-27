@@ -66,9 +66,9 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-          <v-btn v-if="token" text @click="cleanToken()">{{$t('share.logout')}}</v-btn>
+          <v-btn v-if="token" rounded text @click="cleanToken()">{{$t('share.logout')}}</v-btn>
           <v-spacer />
-          <v-btn text @click="display = false">{{$t('close')}}</v-btn>
+          <v-btn rounded text @click="display = false">{{$t('close')}}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

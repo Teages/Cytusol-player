@@ -42,6 +42,10 @@
     "login": "使用 OneDrive 登录",
     "useragreement": "使用即同意用户条款"
   },
+  "history": {
+    "title": "历史记录",
+    "void": "历史记录为空"
+  },
   "$vuetify": {
     "noDataText": "no Data"
   }

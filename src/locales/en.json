@@ -41,5 +41,9 @@
     "logout": "Logout",
     "login": "Login with OneDrive",
     "useragreement": "User Agreement"
+  },
+  "history": {
+    "title": "History",
+    "void": "No history"
   }
 }
