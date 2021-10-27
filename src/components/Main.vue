@@ -586,6 +586,12 @@ export default {
       this.shareId = this.getUrlKey('shareId')
       this.loadSharedChart()
     }
+    if (window.opener) {
+      console.log(window.opener["openLevel"])
+      this.localFile = window.opener["openLevel"]
+      this.way = 2
+      this.nextStep()
+    }
     this.getToken()
     // console.log(localStorage)
   },

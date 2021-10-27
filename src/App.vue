@@ -1,6 +1,10 @@
 <template>
-  <v-app style="user-select: none">
-    
+  <v-app
+    style="user-select: none"
+    @dragenter="dropping = true && log"
+    @dragleave="dropping = false"
+  >
+    <Drop/>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -72,17 +76,28 @@
 import Main from './components/Main';
 import Setting from './components/Setting.vue';
 import Language from './components/Language.vue';
+import Drop from './components/Drop.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Main, Setting, Language
-  },
+    Main,
+    Setting,
+    Language,
+    Drop
+},
 
   data: () => ({
-    drawer: false
+    drawer: false,
+    dropping: false,
   }),
+  methods: {
+    
+    log(data) {
+      console.log(data)
+    }
+  },
   mounted() {
     window.matchMedia('(prefers-color-scheme: light)').addEventListener("change", ()=>{
       this.$vuetify.theme.dark = window.matchMedia('(prefers-color-scheme: dark)').matches
