@@ -99,7 +99,7 @@ export default {
   },
   beforeMount() {
     if (localStorage.setting) {
-      this.setting = JSON.parse(localStorage.setting)
+      this.setting = Object.assign({}, this.defaultSetting, JSON.parse(localStorage.setting))
     } else {
       this.setDefaultSetting()
     }
