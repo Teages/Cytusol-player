@@ -84,10 +84,11 @@ export default {
             difficultyType: type,
             difficultyName: this.leveldata.chartList[type].title,
             difficultyLevel: this.leveldata.chartList[type].difficulty,
-            levelName: this.leveldata.metadata.title,
+            levelName: this.leveldata.metadata.title
           },
           player: {
-            deviceOffset: JSON.parse(localStorage.setting).deviceOffset || 0
+            deviceOffset: JSON.parse(localStorage.setting).deviceOffset || 0,
+            playSpeed: JSON.parse(localStorage.setting).playSpeed || 1
           }
         }
       },'*')

@@ -34,8 +34,7 @@
             </template>
           </v-slider>
           <v-slider
-            v-model="setting.playspeed"
-            disabled
+            v-model="setting.playSpeed"
             max="2"
             min="0.25"
             step="0.25"
@@ -83,7 +82,7 @@ export default {
       dialog: false,
       defaultSetting: {
         deviceOffset: 0.05,
-        playspeed: 1,
+        playSpeed: 1,
         cdnUrl: "https://worker.teages.xyz/cdn/cytoidlevels/",
       },
       setting: {},
