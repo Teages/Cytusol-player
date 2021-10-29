@@ -3,7 +3,7 @@
     absolute class="drop-box"
     opacity="0.85"
     align="center"
-    :style="dropping? null : {visibility: 'hidden', opacity: '0'}"
+    :style="dropping? null : {display: 'none', opacity: '0'}"
   >
     <v-row
       justify="center" style="height: 100vh"
