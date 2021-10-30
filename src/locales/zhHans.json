@@ -32,7 +32,9 @@
     "playspeed": "播放速度",
     "luncherTitle": "启动器设置",
     "cdnUrl": "云谱面位置",
-    "reset": "重置所有设置"
+    "reset": "重置所有设置",
+    "editColor": "编辑 Note 颜色",
+    "resetColor": "重置 Note 颜色"
   },
   "downloadingLevel": "正在下载谱面... ({progress}%)",
   "downloadFailed": "谱面下载失败.",

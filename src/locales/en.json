@@ -32,7 +32,9 @@
     "playspeed": "Play Speed",
     "luncherTitle": "Luncher Setting",
     "cdnUrl": "Chart list Url",
-    "reset": "Reset all setting"
+    "reset": "Reset all setting",
+    "editColor": "Edit note color",
+    "resetColor": "Reset note color"
   },
   "downloadingLevel": "Downloading... ({progress}%)",
   "downloadFailed": "Download Failed.",

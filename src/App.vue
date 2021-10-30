@@ -24,6 +24,16 @@
 
       <v-list>
         <v-list-item
+          draggable="false"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-information</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{version}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item
           link
           href="https://github.com/Teages/C2Player-Web" target="_blank"
           draggable="false"
@@ -63,6 +73,7 @@
           <img src="/favicon.ico" alt="CyPlayer" />
         </v-avatar>
         <v-toolbar-title v-text="'CyPlayer'" class="mx-2"/>
+        <v-badge :content="version" v-if="!$vuetify.breakpoint.xs"></v-badge>
       </div>
     <v-spacer/>
     <Language />
@@ -88,9 +99,10 @@ export default {
     Setting,
     Language,
     Drop
-},
+  },
 
   data: () => ({
+    version: "Beta 2020-10-31",
     drawer: false,
     dropping: false,
   }),

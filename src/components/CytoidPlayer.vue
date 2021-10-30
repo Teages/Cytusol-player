@@ -287,7 +287,8 @@ export default {
           },
           player: {
             deviceOffset: JSON.parse(localStorage.setting).deviceOffset || 0,
-            playSpeed: JSON.parse(localStorage.setting).playSpeed || 1
+            playSpeed: JSON.parse(localStorage.setting).playSpeed || 1,
+            colorReg: JSON.parse(localStorage.setting).colorReg || undefined
           }
         }
       },'*')
