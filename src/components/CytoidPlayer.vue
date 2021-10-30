@@ -198,20 +198,20 @@
 
       </v-toolbar>
       <div v-if="display" style="height: 100vh; width: 100%; border: 0" id="player-context" ref='player-box'>
-        <!-- <iframe 
+        <iframe 
           style="height: 100vh; width: 100%; border: 0"
           :class="{disableMutual: disableMutual}"
-          src="https://ctdplayerState.teages.xyz"
+          src="https://ctdplayer.teages.xyz"
           ref='player'
           @load="sendData($refs['player'])"
-        /> -->
-        <iframe 
+        />
+        <!-- <iframe 
           style="height: 100vh; width: 100%; border: 0"
           :class="{disableMutual: disableMutual}"
           :src="'http://' + '192.168.137.1' + ':8080'"
           ref='player'
           @load="sendData($refs['player'])"
-        />
+        /> -->
         <v-btn
           v-if="isFullScreen"
           class="mx-2"
