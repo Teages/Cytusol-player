@@ -458,7 +458,7 @@ export default {
     },
     loadSharedChart() {
       (async() => {
-        let levelUrl = 'https://worker.teages.xyz/shareId/' + this.shareId
+        let levelUrl = 'https://worker.cytusol.xyz/shareId/' + this.shareId
         // console.log(levelUrl)
         await Axios({
           url: levelUrl,

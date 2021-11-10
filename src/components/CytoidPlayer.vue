@@ -202,7 +202,7 @@
         <iframe 
           style="height: 100vh; width: 100%; border: 0"
           :class="{disableMutual: disableMutual}"
-          src="https://ctdplayer.teages.xyz"
+          src="https://player-core.cytusol.xyz"
           ref='player'
           @load="sendData($refs['player'])"
         />

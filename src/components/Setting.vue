@@ -119,7 +119,7 @@
           <v-autocomplete
             disabled
             :label="$t('setting.cdnUrl')"
-            :items="['https://worker.teages.xyz/cdn/cytoidlevels/']"
+            :items="['https://worker.cytusol.xyz/cdn/cytoidlevels/']"
             v-model="setting.cdnUrl"
             @change="saveSetting()"
           ></v-autocomplete>
@@ -153,7 +153,7 @@ export default {
       defaultSetting: {
         deviceOffset: 0,
         playSpeed: 1,
-        cdnUrl: "https://worker.teages.xyz/cdn/cytoidlevels/",
+        cdnUrl: "https://worker.cytusol.xyz/cdn/cytoidlevels/",
         colorReg: {
           click: {
             up: 0,

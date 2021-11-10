@@ -14,9 +14,9 @@
       >
       <div style="display: flex;"> 
         <v-avatar size="32" class="mx-1">
-          <img src="/favicon.ico" alt="CyPlayer" />
+          <img src="/favicon.ico" alt="Cytusol Player" />
         </v-avatar>
-        <v-toolbar-title v-text="'CyPlayer'" class="mx-3"/>
+        <v-toolbar-title v-text="'Player'" class="mx-3"/>
       </div>
       </v-sheet>
 
@@ -70,9 +70,9 @@
         style="display: contents;"
       >
         <v-avatar size="32" class="mx-2">
-          <img src="/favicon.ico" alt="CyPlayer" />
+          <img src="/favicon.ico" alt="Cytusol Player" />
         </v-avatar>
-        <v-toolbar-title v-text="'CyPlayer'" class="mx-2"/>
+        <v-toolbar-title v-text="'Player'" class="mx-2"/>
         <v-badge :content="version" v-if="!$vuetify.breakpoint.xs"></v-badge>
       </div>
     <v-spacer/>
@@ -102,7 +102,7 @@ export default {
   },
 
   data: () => ({
-    version: "Beta 2020-10-31",
+    version: "v 1.0.0",
     drawer: false,
     dropping: false,
   }),

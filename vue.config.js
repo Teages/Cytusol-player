@@ -2,7 +2,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: 'CyPlayer',
+      title: 'Cytusol Player',
     },
   },
 
@@ -22,7 +22,7 @@ module.exports = {
   },
 
   pwa: {
-    name: 'CyPlayer',
+    name: 'Cytusol Player',
     themeColor: '#329EF4',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',

@@ -22,7 +22,7 @@
         color="primary"
       >
         <v-avatar size="32" class="mr-3">
-          <img src="/favicon_red.ico" alt="CyPlayer" />
+          <img src="/favicon_red.ico" alt="Cytusol Player" />
         </v-avatar>
         <v-toolbar-title>CyShare</v-toolbar-title>
         <v-spacer></v-spacer>

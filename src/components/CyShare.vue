@@ -22,7 +22,7 @@
         color="primary"
       >
         <v-avatar size="32" class="mr-3">
-          <img src="/favicon_red.ico" alt="CyPlayer" />
+          <img src="/favicon_red.ico" alt="Cytusol Player" />
         </v-avatar>
         <v-toolbar-title>CyShare</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -108,7 +108,7 @@ export default {
     },
     openLoginUrl() {
       const clientId = '94047eae-723e-43bd-ac33-b6353e98401f';
-      const redirectUrl = `https://player.teages.xyz`;
+      const redirectUrl = `https://player.cytusol.xyz`;
       const scope = 'openid https://graph.microsoft.com/Files.ReadWrite.AppFolder';
       window.open(`https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUrl}&scope=${scope}`)
     },
@@ -144,7 +144,7 @@ export default {
         }
         this.cloudId = uploadResponse.data.id;
         let shareData = await this.getSharedData(this.cloudId, token)
-        this.shareLink = `https://player.teages.xyz/?shareId=${shareData.data.shareId}`
+        this.shareLink = `https://player.cytusol.xyz/?shareId=${shareData.data.shareId}`
         this.uploadProgress = 101
       })();
     },
