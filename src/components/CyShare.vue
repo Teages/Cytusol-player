@@ -58,7 +58,7 @@
             {{$t('share.login')}}
           </v-btn>
           <v-btn text rounded block class="my-4"
-            href="https://github.com/Teages/C2Player-Web#share-with-onedrive" target="_blank"
+            href="https://github.com/Teages/Cytusol-player#share-with-onedrive" target="_blank"
           >
             {{$t('share.useragreement')}}
           </v-btn>

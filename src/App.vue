@@ -35,7 +35,7 @@
         </v-list-item>
         <v-list-item
           link
-          href="https://github.com/Teages/C2Player-Web" target="_blank"
+          href="https://github.com/Teages/Cytusol-player" target="_blank"
           draggable="false"
         >
           <v-list-item-icon>
