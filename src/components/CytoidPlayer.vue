@@ -10,6 +10,7 @@
       <v-btn
         color="primary"
         rounded
+        :disabled="!(leveldata.chartList[chartType].chart && leveldata.chartList[chartType].audio)"
 
         v-bind="attrs"
         v-on="on"

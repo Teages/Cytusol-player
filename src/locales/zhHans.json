@@ -22,7 +22,7 @@
   "chartErrMessage": {
     "level": "无法读取 level.json!",
     "background": "无法读取背景图片!",
-    "chart": "无法读取谱面!",
+    "chart": "读取一个或多个谱面时发生错误!",
     "audio": "无法读取音频文件!"
   },
   "setting": {

@@ -93,30 +93,8 @@
         </v-window-item>
 
         <v-window-item :value="1">
-          <div style="height: 450px;" class="hide-scroller">
-            <v-card-text v-if="chartData">
-              <h4>{{ $t("preview") }}</h4>
-              <CytoidLevelCard :leveldata="chartData" />
-              <h4>{{ $t("chooseDifficulty") }}</h4>
-              <v-list>
-                <v-list-item-group
-                  v-model="chartSelect"
-                  active-class="blue--text"
-                >
-                  <v-list-item
-                    v-for="chart in chartData.chartList"
-                    :key="chart.type"
-                  >
-                    <ctd-diff
-                      :type="chart.type"
-                      :name="chart.title"
-                      :diff="chart.difficulty"
-                    />
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-card-text>
-            <v-card-text v-else class="pa-4 text-center" style="height: 100%">
+          <div style="height: 500px;" class="hide-scroller">
+            <v-card-text>
               <v-alert
                 type="error" dense justify-end
                 v-if="chartError"
@@ -125,17 +103,40 @@
               </v-alert>
               <v-alert
                 type="info" dense justify-end
-                v-else
+                v-else-if="!chartData"
               >
                 {{ $t("loadingChart") }}
               </v-alert>
+              <div v-if="chartData">
+                <h4>{{ $t("preview") }}</h4>
+                <CytoidLevelCard :leveldata="chartData" />
+                <h4>{{ $t("chooseDifficulty") }}</h4>
+                <v-list>
+                  <v-list-item-group
+                    v-model="chartSelect"
+                    active-class="blue--text"
+                  >
+                    <v-list-item
+                      v-for="chart in chartData.chartList"
+                      :disabled="!(chart.chart && chart.audio)"
+                      :style="(chart.chart && chart.audio) ? null : 'filter: grayscale(100%);'"
+                      :key="chart.type"
+                    >
+                      <ctd-diff
+                        :type="chart.type"
+                        :name="chart.title"
+                        :diff="chart.difficulty"
+                      />
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+                </div>
             </v-card-text>
           </div>
         </v-window-item>
 
         <v-window-item :value="2">
           <div class="pa-4 text-center" v-if="chartData">
-            <!-- <p v-text="chartData.chartList[Object.keys(chartData.chartList)[chartSelect]].type"></p> -->
             <span class="">{{ $t("ready") }}</span>
           </div>
         </v-window-item>
@@ -163,7 +164,7 @@
           <v-icon>mdi-arrow-right-thick</v-icon>
         </v-btn>
         <CytoidPlayer
-          v-else-if="chartData != null && chartSelect >= 0"
+          v-else-if="chartData != null && (chartSelect || chartSelect === 0) && chartSelect >= 0"
           :leveldata="chartData"
           :chartType="
             chartData.chartList[Object.keys(chartData.chartList)[chartSelect]]
@@ -259,7 +260,7 @@ export default {
       }
     },
     nextStep() {
-      this.chartError = null
+      this.chartError = null;
       this.chartData = null;
       this.initChart();
       this.step++;
@@ -336,7 +337,6 @@ export default {
             };
           }
           this.chartData = { metadata, background, chartList };
-          console.log(this.chartData);
         }
       })();
     },

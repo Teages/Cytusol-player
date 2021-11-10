@@ -129,6 +129,7 @@ export default {
 
 .cytoid-level-card .index .difficulty-box {
   text-align: end;
+  width: 100%;
 }
 
 .cytoid-level-card .index .info-box {
