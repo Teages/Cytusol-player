@@ -115,7 +115,7 @@
           </v-dialog>
 
 
-          <v-card-title>{{ $t('setting.luncherTitle') }}</v-card-title>
+          <v-card-title>{{ $t('setting.LauncherTitle') }}</v-card-title>
           <v-autocomplete
             disabled
             :label="$t('setting.cdnUrl')"
