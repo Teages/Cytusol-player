@@ -33,3 +33,24 @@ If you are no longer willing to share the level, please delete the uploaded file
 Please **NOT** to upload anything that makes others feel unpleasant.
 
 Other: [Microsoft Services Agreement](https://www.microsoft.com/en-us/servicesagreement/)
+
+### What will happen if I upload my level?
+
+#### Before upload 
+
+your level just save in your local device.
+
+#### Uploading
+
+We will save your level in **your** OneDrive. Then share this level with OneDrive API.
+
+> So we never save any level on our server. All data kept by users' storage.
+
+#### Uploaded 
+
+We mixed the shared url from OneDrive and our domain, then you got the share link.
+
+
+### About Microsoft and OneDrive access permission
+
+We can only visit your application folder and we will not save any data of your Microsoft account
