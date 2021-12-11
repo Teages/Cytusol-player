@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import Main from './components/Main';
+import Main from './components/Main.vue';
 import Setting from './components/Setting.vue';
 import Language from './components/Language.vue';
 import Drop from './components/Drop.vue';
@@ -102,7 +102,7 @@ export default {
   },
 
   data: () => ({
-    version: "v 1.0.0",
+    version: "v 1.1.0",
     drawer: false,
     dropping: false,
   }),

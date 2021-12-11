@@ -202,7 +202,7 @@
         <iframe 
           style="height: 100vh; width: 100%; border: 0"
           :class="{disableMutual: disableMutual}"
-          src="/core"
+          src="/core/index.html"
           ref='player'
           @load="sendData($refs['player'])"
         />
