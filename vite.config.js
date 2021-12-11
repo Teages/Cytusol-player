@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import viteComponents, {
   VuetifyResolver,
 } from 'vite-plugin-components';
+import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 export default defineConfig({
   resolve: {
@@ -20,6 +21,7 @@ export default defineConfig({
   base: "/",
   plugins: [
     // vue()
+    VitePWA({}),
     createVuePlugin(),
     viteComponents({
       customComponentResolvers: [
