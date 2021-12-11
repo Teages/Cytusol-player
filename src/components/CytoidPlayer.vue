@@ -202,17 +202,10 @@
         <iframe 
           style="height: 100vh; width: 100%; border: 0"
           :class="{disableMutual: disableMutual}"
-          src="https://player-core.cytusol.xyz"
+          src="/core"
           ref='player'
           @load="sendData($refs['player'])"
         />
-        <!-- <iframe 
-          style="height: 100vh; width: 100%; border: 0"
-          :class="{disableMutual: disableMutual}"
-          :src="'http://' + '192.168.137.1' + ':8080'"
-          ref='player'
-          @load="sendData($refs['player'])"
-        /> -->
         <v-btn
           v-if="isFullScreen"
           class="mx-2"
