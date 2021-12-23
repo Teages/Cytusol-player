@@ -9,6 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
+    "@mdi/font": "^6.5.95",
     "@vue/composition-api": "^1.2.4",
     "core-js": "^3.6.5",
     "jszip": "^3.7.1",
@@ -32,6 +33,7 @@
     "sass-loader": "^10.0.0",
     "stylus": "^0.55.0",
     "stylus-loader": "^6.2.0",
+    "typeface-roboto": "^1.1.13",
     "vue-cli-plugin-axios": "~0.0.4",
     "vue-cli-plugin-i18n": "~2.3.1",
     "vue-cli-plugin-vuetify": "^2.4.3",
