@@ -102,7 +102,7 @@ export default {
   },
 
   data: () => ({
-    version: "v 1.1.0",
+    version: "v 1.3.0",
     drawer: false,
     dropping: false,
   }),

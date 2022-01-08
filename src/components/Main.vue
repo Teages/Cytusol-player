@@ -189,6 +189,8 @@ import CytoidLevelCard from "./CytoidLevelCard.vue";
 import CyShare from "./CyShare.vue";
 import CyShareHistory from "./CyShareHistory.vue";
 
+import toC2converter from './tools/ToC2converter'
+
 export default {
   name: "Main",
 
@@ -420,7 +422,11 @@ export default {
                       .file(chartURL)
                       .async("string")
                       .then((str) => {
-                        chartJson = JSON.parse(str);
+                        try {
+                          chartJson = JSON.parse(str);
+                        } catch (error) {
+                          chartJson = JSON.parse(toC2converter(str));
+                        }
                       });
                   } catch (error) {
                     console.error(error)
